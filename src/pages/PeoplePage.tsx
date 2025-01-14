@@ -1,23 +1,24 @@
-import { useEffect, useState } from "react";
-import { Loader } from "../components/Loader"
-import { Link } from "react-router-dom";
-import PeopleTable from "../components/PeopleTable";
+import { useEffect, useState } from 'react';
+import { Loader } from '../components/Loader';
+import PeopleTable from '../components/PeopleTable';
 
 export const PeoplePage = () => {
   const [people, setPeople] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         await new Promise(resolve => setTimeout(resolve, 1000));
-        const response = await fetch('https://mate-academy.github.io/react_people-table/api/people.json');
+        const response = await fetch(
+          'https://mate-academy.github.io/react_people-table/api/people.json',
+        );
         const data = await response.json();
+
         setPeople(data);
-      } catch (error) {
-        console.error('People loading error:', error);
+      } catch (e) {
         setError('People loading error');
       } finally {
         setIsLoading(false);
@@ -26,6 +27,7 @@ export const PeoplePage = () => {
 
     fetchData();
   }, []);
+
   return (
     <>
       <h1 className="title">People Page</h1>
@@ -34,7 +36,9 @@ export const PeoplePage = () => {
           {isLoading ? (
             <Loader />
           ) : error ? (
-            <p data-cy="peopleLoadingError" className="has-text-danger">{error}</p>
+            <p data-cy="peopleLoadingError" className="has-text-danger">
+              {error}
+            </p>
           ) : people.length === 0 ? (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           ) : (
@@ -43,5 +47,5 @@ export const PeoplePage = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

@@ -1,7 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Person } from '../types';
 
-const PersonLink = ({ person, setSelectedPerson }) => {
+interface PersonLinkProps {
+  person: Person;
+  setSelectedPerson: (slug: string) => void;
+}
+
+const PersonLink: React.FC<PersonLinkProps> = ({
+  person,
+  setSelectedPerson,
+}) => {
   if (!person || !person.slug) {
     return <span>{person.name}</span>;
   }

@@ -5,7 +5,6 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { PeoplePage } from './pages/PeoplePage';
 
 export const App = () => {
-
   const location = useLocation();
 
   return (
@@ -18,7 +17,10 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <Link className={`navbar-item ${location.pathname === '/' ? 'has-background-grey-lighter' : ''}`} to="/">
+            <Link
+              className={`navbar-item ${location.pathname === '/' ? 'has-background-grey-lighter' : ''}`}
+              to="/"
+            >
               Home
             </Link>
 
@@ -35,7 +37,7 @@ export const App = () => {
       <main className="section">
         <div className="container">
           <Routes>
-            <Route path='/' element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Navigate to="/" replace />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people/:slug" element={<PeoplePage />} />
@@ -44,5 +46,5 @@ export const App = () => {
         </div>
       </main>
     </div>
-  )
+  );
 };
